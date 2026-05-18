@@ -3,6 +3,6 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "python api.py"
+    "startCommand": "python3 api.py"
   }
 }
