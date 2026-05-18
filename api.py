@@ -104,7 +104,7 @@ print("Kraunamas modelis...")
 irenginys = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Įrenginys: {irenginys}")
 
-tokenizer = BertTokenizer.from_pretrained("aac_modelis")
+tokenizer = BertTokenizer.from_pretrained("gaag2002/snekutis-aac")
 
 from transformers import BertForMaskedLM
 bert = BertForMaskedLM.from_pretrained("bert-base-multilingual-cased")
@@ -126,7 +126,11 @@ bert = bert.to(irenginys)
 zodyno_vektoriai = uzkoduoti_zodyną(VARTOTOJO_ZODYNAS, tokenizer, bert, irenginys)
 
 modelis = AACModelis(bert, zodyno_vektoriai).to(irenginys)
-modelis.load_state_dict(torch.load("aac_modelis/modelio_svoriai.pt", map_location=irenginys))
+
+from huggingface_hub import hf_hub_download
+modelio_kelias = hf_hub_download(repo_id="gaag2002/snekutis-aac", filename="modelio_svoriai.pt")
+modelis.load_state_dict(torch.load(modelio_kelias, map_location=irenginys))
+
 modelis.eval()
 print(" Modelis pakrautas!")
 print(" TTS paruoštas (gTTS)!")
