@@ -4,4 +4,4 @@ dist/
 .idea/
 *.iml
 __pycache__/
-*.pyc
+*.pycaac_modelis/modelio_svoriai.pt
