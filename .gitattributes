@@ -1,1 +1,2 @@
 *.pt filter=lfs diff=lfs merge=lfs -text
+aac_modelis/modelio_svoriai.pt filter=lfs diff=lfs merge=lfs -text
