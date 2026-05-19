@@ -1,14 +1,9 @@
 import { useState, useCallback } from "react";
-
-const API_URL = window.Capacitor 
-  ? "http://10.0.2.2:5000" 
-  : "http://localhost:5000";
-
+const API_URL = "https://snekutis.onrender.com";
 export function useAISuggestions() {
   const [siulymai, setSiulymai] = useState([]);
   const [kraunama, setKraunama] = useState(false);
   const [klaida, setKlaida] = useState(null);
-
   const gauti_siulymus = useCallback(async (sakinys_korteles) => {
     if (sakinys_korteles.length === 0) {
       setSiulymai([]);
@@ -33,8 +28,6 @@ export function useAISuggestions() {
       setKraunama(false);
     }
   }, []);
-
   const isvalyti = useCallback(() => setSiulymai([]), []);
-
   return { siulymai, kraunama, klaida, gauti_siulymus, isvalyti };
 }

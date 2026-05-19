@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Delete, Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const TEISINGAS_PIN = "1234"; // Pakeisk pagal poreikį
+const TEISINGAS_PIN = "1234"; // Pin kodas
 
 export default function PinEkranas() {
   const [ivesta, setIvesta] = useState("");

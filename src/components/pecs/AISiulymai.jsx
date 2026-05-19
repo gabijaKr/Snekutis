@@ -5,21 +5,21 @@ import PecsCard from "./PecsCard";
 import { CARDS } from "@/lib/pecsData";
 
 export default function AISiulymai({ siulymai, kraunama, klaida, onCardTap }) {
-  const [uždarytas, setUždarytas] = useState(false);
+  const [uzdarytas, setUzdarytas] = useState(false);
   const rasti_kortele = (korteles_id) => CARDS.find((c) => c.id === korteles_id);
   const rodyti = kraunama || siulymai.length > 0 || klaida;
 
   // Kai atsiranda nauji siūlymai – automatiškai atidaryti juostą
   useEffect(() => {
-    if (siulymai.length > 0) setUždarytas(false);
+    if (siulymai.length > 0) setUzdarytas(false);
   }, [siulymai]);
 
   if (!rodyti) return null;
-  if (uždarytas) return (
+  if (uzdarytas) return (
     <motion.button
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      onClick={() => setUždarytas(false)}
+      onClick={() => setUzdarytas(false)}
       className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-card border-2 border-pecs-purple text-pecs-purple text-xs font-bold self-start"
     >
       <Sparkles className="w-3 h-3" />
@@ -43,7 +43,7 @@ export default function AISiulymai({ siulymai, kraunama, klaida, onCardTap }) {
           <Loader2 className="w-4 h-4 text-pecs-purple animate-spin ml-auto" />
         )}
         <button
-          onClick={() => setUždarytas(true)}
+          onClick={() => setUzdarytas(true)}
           className={`${kraunama ? "" : "ml-auto"} w-6 h-6 rounded-full bg-muted hover:bg-muted/80 flex items-center justify-center transition-colors`}
           aria-label="Uždaryti AI siūlymus"
         >

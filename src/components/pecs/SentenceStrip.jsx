@@ -36,15 +36,15 @@ function SentenceCard({ card, onRemove, index }) {
   );
 }
 
-function formatuotiSakinį(kortelės) {
-  if (kortelės.length === 0) return "";
-  const žodžiai = kortelės.map((c) => c.label.toLowerCase());
-  žodžiai[0] = žodžiai[0].charAt(0).toUpperCase() + žodžiai[0].slice(1);
-  return žodžiai.join(" ");
+function formatuotiSakini(korteles) {
+  if (korteles.length === 0) return "";
+  const zodziai = korteles.map((c) => c.label.toLowerCase());
+  zodziai[0] = zodziai[0].charAt(0).toUpperCase() + zodziai[0].slice(1);
+  return zodziai.join(" ");
 }
 
 export default function SentenceStrip({ sentence, onRemoveCard, onClear, onSpeak }) {
-  const rodomаsSakinys = formatuotiSakinį(sentence);
+  const rodomаsSakinys = formatuotiSakini(sentence);
 
   return (
     <div className="w-full bg-card rounded-2xl shadow-xl border-2 border-border p-3 sm:p-4">

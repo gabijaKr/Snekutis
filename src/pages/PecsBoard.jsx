@@ -10,12 +10,12 @@ import AISiulymai from "@/components/pecs/AISiulymai";
 import { useAISuggestions } from "@/hooks/useAISuggestions";
 import { getCategoriesByGroup } from "@/lib/pecsData";
 
-const isAndroid = /android/i.test(navigator.userAgent);
-const API_URL = isAndroid ? "http://10.0.2.2:5000" : "http://localhost:5000";
+const API_URL = "https://snekutis.onrender.com";
 
 export default function PecsBoard() {
   const [sentence, setSentence] = useState([]);
   const [activeGroup, setActiveGroup] = useState("ivardžiai");
+  const [isPlaying, setIsPlaying] = useState(false);
   const [activeCategory, setActiveCategory] = useState("ivardžiai");
   const { siulymai, kraunama, klaida, gauti_siulymus, isvalyti } = useAISuggestions();
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function PecsBoard() {
   }, []);
 
   const handleCardTap = useCallback((card) => {
-    if (tevuRezimas) return; // kortelių spaudinėjimas išjungtas tėvų režime
+    if (tevuRezimas) return;
     setSentence((prev) => {
       const naujas = [...prev, card];
       gauti_siulymus(naujas);
@@ -51,31 +51,40 @@ export default function PecsBoard() {
     isvalyti();
   }, [isvalyti]);
 
-  const handleSpeak = useCallback(async () => {
-    const text = sentence.map((c) => c.label).join(" ");
-    if (!text) return;
-    try {
-      const response = await fetch(`${API_URL}/kalbeti`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ tekstas: text }),
-      });
-      const data = await response.json();
-      if (data.audio) {
-        const audio = new Audio(`data:audio/mp3;base64,${data.audio}`);
-        await audio.play();
+const handleSpeak = useCallback(async () => {
+  if (isPlaying) return;
+  const text = sentence.map((c) => c.label).join(" ");
+  if (!text) return;
+  setIsPlaying(true);
+  try {
+    const response = await fetch(`${API_URL}/kalbeti`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tekstas: text }),
+    });
+    const data = await response.json();
+    if (data.audio) {
+      if (window._currentAudio) {
+        window._currentAudio.pause();
+        window._currentAudio.currentTime = 0;
       }
-    } catch (err) {
-      console.error("Garso klaida:", err);
-      if ("speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = "lt-LT";
-        utterance.rate = 0.85;
-        window.speechSynthesis.speak(utterance);
-      }
+      const audio = new Audio(`data:audio/mp3;base64,${data.audio}`);
+      window._currentAudio = audio;
+      audio.onended = () => setIsPlaying(false);
+      await audio.play();
     }
-  }, [sentence]);
+  } catch (err) {
+    console.error("Garso klaida:", err);
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "lt-LT";
+      utterance.rate = 0.85;
+      window.speechSynthesis.speak(utterance);
+    }
+    setIsPlaying(false);
+  }
+}, [sentence, isPlaying]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
