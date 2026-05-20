@@ -1,39 +1,26 @@
-**Welcome to your Base44 project** 
+# Programėlė „Šnekutis"
 
-**About**
+Programėlė „Šnekutis" yra mobilioji komunikacinė programėlė, paremta PECS kortelių sistema. Programėlė skirta mokyklinio amžiaus autizmo spektro sutrikimą turintiems vaikams ir leidžia iš komunikacijos kortelių sudaryti sakinius sakinio juostelėje. Sistemoje integruotas kortelių prognozavimo modelis, apmokytas pagal PrAACT metodą lietuvių kalba, kuris realiuoju laiku siūlo tinkamas korteles. 
 
-View and Edit  your app on [Base44.com](http://Base44.com) 
+Šiame kataloge pateikiamas sukurtos Android programėlės „Šnekutis" programinis kodas, PrAACT modelio apmokymo failai bei paleidimo instrukcija.
 
-This project contains everything you need to run your app locally.
+## Parsisiuntimas
 
-**Edit the code in your local development environment**
+Programėlės APK failą galite rasti Releases skiltyje arba
+Galite iškart atsiųsti nuoroda: https://github.com/gabijaKr/Snekutis/releases/download/v1.0/app-release.apk
 
-Any change pushed to the repo will also be reflected in the Base44 Builder.
+## Reikalavimai
 
-**Prerequisites:** 
+- Android 8.0 (Oreo) ar naujesnė versija
+- Interneto ryšys (AI siūlymams ir garso sintezei)
 
-1. Clone the repository using the project's Git URL 
-2. Navigate to the project directory
-3. Install dependencies: `npm install`
-4. Create an `.env.local` file and set the right environment variables
+## Įdiegimas
 
-```
-VITE_BASE44_APP_ID=your_app_id
-VITE_BASE44_APP_BASE_URL=your_backend_url
+1. Parsisiųsti APK failą
+2. Android įrenginyje leisti diegti iš nežinomų šaltinių:
+   `Nustatymai → Sauga → Leisti diegti iš nežinomų šaltinių`
+3. Atidaryti parsisiųstą APK failą ir įdiegti
 
-e.g.
-VITE_BASE44_APP_ID=cbef744a8545c389ef439ea6
-VITE_BASE44_APP_BASE_URL=https://my-to-do-list-81bfaad7.base44.app
-```
+## Licencija
 
-Run the app: `npm run dev`
-
-**Publish your changes**
-
-Open [Base44.com](http://Base44.com) and click on Publish.
-
-**Docs & Support**
-
-Documentation: [https://docs.base44.com/Integrations/Using-GitHub](https://docs.base44.com/Integrations/Using-GitHub)
-
-Support: [https://app.base44.com/support](https://app.base44.com/support)
+Piktogramos naudojamos darbe yra Aragono vyriausybės nuosavybė ir sukurti Sergio Palao ARASAAC projektui (http://www.arasaac.org), kuris juos platina pagal „Creative Commons" licenciją BY-NC-SA.
